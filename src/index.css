@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Live Collaborative Editor Design System */
+
+@layer base {
+  :root {
+    /* Dark theme with vibrant accents */
+    --background: 222 20% 8%;
+    --foreground: 220 15% 95%;
+    
+    --card: 222 20% 10%;
+    --card-foreground: 220 15% 95%;
+    
+    --popover: 222 20% 12%;
+    --popover-foreground: 220 15% 95%;
+    
+    /* Primary: Electric blue gradient */
+    --primary: 217 91% 60%;
+    --primary-glow: 217 91% 70%;
+    --primary-foreground: 220 15% 95%;
+    
+    /* Secondary: Deep purple */
+    --secondary: 260 20% 20%;
+    --secondary-foreground: 220 15% 95%;
+    
+    /* Muted: Subtle grays */
+    --muted: 222 15% 15%;
+    --muted-foreground: 220 10% 65%;
+    
+    /* Accent: Vibrant cyan */
+    --accent: 180 100% 60%;
+    --accent-glow: 180 100% 70%;
+    --accent-foreground: 222 20% 8%;
+    
+    /* Success: Emerald */
+    --success: 142 76% 36%;
+    --success-foreground: 220 15% 95%;
+    
+    /* Warning: Amber */
+    --warning: 38 92% 50%;
+    --warning-foreground: 222 20% 8%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 220 15% 95%;
+    
+    /* Editor specific colors */
+    --editor-bg: 222 25% 9%;
+    --editor-sidebar: 222 20% 10%;
+    --editor-border: 222 15% 18%;
+    --editor-selection: 217 91% 60% / 0.2;
+    
+    /* Borders and inputs */
+    --border: 222 15% 18%;
+    --input: 222 15% 18%;
+    --ring: 217 91% 60%;
+    
+    --radius: 0.75rem;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-glow)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(222 20% 12%));
+    --gradient-editor: linear-gradient(180deg, hsl(var(--editor-bg)), hsl(222 25% 7%));
+    
+    /* Shadows */
+    --shadow-glow: 0 0 30px hsl(var(--primary) / 0.3);
+    --shadow-accent-glow: 0 0 25px hsl(var(--accent) / 0.4);
+    --shadow-card: 0 10px 30px -10px hsl(222 50% 4% / 0.8);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background: hsl(var(--background));
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--accent));
+  }
+}
+
+@layer components {
+  /* Editor styles */
+  .editor-container {
+    @apply bg-[hsl(var(--editor-bg))] border border-[hsl(var(--editor-border))] rounded-xl;
+    background: var(--gradient-editor);
+  }
+  
+  .editor-content {
+    @apply prose prose-invert max-w-none p-6 focus:outline-none;
+  }
+  
+  .editor-content h1 {
+    @apply text-3xl font-bold text-foreground mb-4;
+  }
+  
+  .editor-content h2 {
+    @apply text-2xl font-semibold text-foreground mb-3;
+  }
+  
+  .editor-content p {
+    @apply text-foreground leading-relaxed mb-4;
+  }
+  
+  .editor-content strong {
+    @apply text-[hsl(var(--accent))] font-semibold;
+  }
+  
+  .editor-content em {
+    @apply text-[hsl(var(--accent-glow))] italic;
+  }
+  
+  /* Selection styles */
+  .editor-content ::selection {
+    background: hsl(var(--editor-selection));
+  }
+  
+  /* AI Chat styles */
+  .chat-message {
+    @apply p-4 rounded-xl mb-3 transition-all duration-300;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+  }
+  
+  .chat-message.user {
+    @apply bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))];
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .chat-message.ai {
+    @apply bg-[hsl(var(--card))] text-[hsl(var(--card-foreground))];
+  }
+  
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .glow-accent {
+    box-shadow: var(--shadow-accent-glow);
+  }
+  
+  /* Animation classes */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes glow {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    }
+    50% { 
+      box-shadow: 0 0 30px hsl(var(--primary) / 0.5), 0 0 40px hsl(var(--accent) / 0.3);
+    }
+  }
+  
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
+}
