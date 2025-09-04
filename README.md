@@ -12,8 +12,6 @@ A beautiful, modern collaborative editor with AI-powered suggestions and real-ti
 
 ## 🛠️ Tech Stack
 
-- **React** with TypeScript
-- **Vite** for fast development
 - **Tailwind CSS** for styling
 - **Tiptap** for rich text editing
 - **Lucide Icons** for beautiful icons
